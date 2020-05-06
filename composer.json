@@ -1,0 +1,10 @@
+{
+    "require": {
+        "mesilov/bitrix24-php-sdk": "^0.6.1",
+        "symfony/dotenv": "^4.4",
+        "monolog/monolog": "^1.25"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.4"
+    }
+}
