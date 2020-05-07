@@ -49,17 +49,17 @@ if (!empty($data['action']) && !empty($data['pull_request'])) {
     }
 
     if ($action == 'opened') {
-        $taskComment->add(1, [
+        $taskComment->add($taskId, [
             'POST_MESSAGE' => 'Добавлен Pull Request '.$data['pull_request']['html_url']
         ]);
     }
     else if ($action == 'synchronize') {
-        $taskComment->add(1, [
+        $taskComment->add($taskId, [
             'POST_MESSAGE' => 'Обновлен Pull Request '.$data['pull_request']['html_url']
         ]);
     }
     else if ($action == 'closed') {
-        $taskComment->add(1, [
+        $taskComment->add($taskId, [
             'POST_MESSAGE' => 'Закрыт Pull Request '.$data['pull_request']['html_url']
         ]);
         $task->complete($taskId);
