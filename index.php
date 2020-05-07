@@ -48,6 +48,9 @@ if (!empty($data['action']) && !empty($data['pull_request'])) {
         exit(200);
     }
 
+    $taskStatus = $taskItem['result']['STATUS'];
+    $isMerged = !is_null($data['pull_request']['merged_at']);
+
     if ($action == 'opened') {
         $taskComment->add($taskId, [
             'POST_MESSAGE' => 'Добавлен Pull Request '.$data['pull_request']['html_url']
@@ -62,6 +65,16 @@ if (!empty($data['action']) && !empty($data['pull_request'])) {
         $taskComment->add($taskId, [
             'POST_MESSAGE' => 'Закрыт Pull Request '.$data['pull_request']['html_url']
         ]);
-        $task->complete($taskId);
+        if ($taskStatus != 5 && $isMerged) {
+            $task->complete($taskId);
+        }
+    }
+    else if ($action == 'reopened') {
+        $taskComment->add($taskId, [
+            'POST_MESSAGE' => 'Переоткрыт Pull Request '.$data['pull_request']['html_url']
+        ]);
+        if ($taskStatus == 5) {
+            $task->renew($taskId);
+        }
     }
 }
