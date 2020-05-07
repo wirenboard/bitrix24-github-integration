@@ -55,6 +55,9 @@ if (!empty($data['action']) && !empty($data['pull_request'])) {
         $taskComment->add($taskId, [
             'POST_MESSAGE' => 'Добавлен Pull Request '.$data['pull_request']['html_url']
         ]);
+        if ($taskStatus != 3) {
+            $task->startExecution($taskId);
+        }
     }
     else if ($action == 'synchronize') {
         $taskComment->add($taskId, [
