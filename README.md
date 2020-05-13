@@ -21,7 +21,7 @@ composer install
 1. Переходим по ссылке (вместо {host} указываем ваш): https://{host}.bitrix24.ru/marketplace/local/edit/0/
 2. В первом поле вписываем название приложения, например Github
 3. Отмечаем чекбокс - Приложение использует только API
-4. В разделе Права доступа отмечаем чекбокс - Задачи (task)
+4. В разделе Права доступа отмечаем чекбоксы - Пользователи (user) и Задачи (task)
 5. В поле - Укажите ссылку* пишем адрес где развернуто сервер приложение, например http://host/index.php
 6. В поле - Укажите ссылку для первоначальной установки (необязательно) пишем адрес к install.php, например 
 https://host/install.php
@@ -43,7 +43,7 @@ nano .env
 APPLICATION_ID= берем из колонки Код приложения (Client ID) по ссылке https://{host}.bitrix24.ru/marketplace/local/list/
 APPLICATION_SECRET= берем из колонки Ключ приложения (Client Secret) по ссылке https://{host}.bitrix24.ru/marketplace/local/list/
 APPLICATION_DOMAIN={host}.bitrix24.ru (подставляем вместо {host} свой)
-APPLICATION_SCOPE=task
+APPLICATION_SCOPE=task,user
 ```
 
 * Авторизуем серверное приложение
@@ -79,3 +79,6 @@ APPLICATION_SCOPE=task
 feature/100-add-new-type, где 100 это номер задачи в Bitrix24
 bugfix/253-fix-user-bug, где 253 это номер задачи в Bitrix24
 ```
+
+Чтобы система связывала аккаунт на GitHub и Bitrix24 нужно в настройках контактной информации пользователя Bitrix24
+добавить поле - Другие сайты и туда написать логин на Github без знака @ 

@@ -14,20 +14,18 @@ if (empty($_REQUEST['auth']['domain']) || empty($_REQUEST['auth']['member_id']) 
 
 $params = Client::load();
 
-if (!count($params)) {
-    $params = [
-        'B24_APPLICATION_ID'     => $_ENV['APPLICATION_ID'],
-        'B24_APPLICATION_SECRET' => $_ENV['APPLICATION_SECRET'],
-        'B24_APPLICATION_SCOPE'  => explode(',', $_ENV['APPLICATION_SCOPE']),
-        'B24_REDIRECT_URI'       => 'https://'.$_SERVER['SERVER_NAME'].'/index.php',
-        'DOMAIN'                 => $_REQUEST['auth']['domain'],
-        'MEMBER_ID'              => $_REQUEST['auth']['member_id'],
-        'AUTH_ID'                => $_REQUEST['auth']['access_token'],
-        'REFRESH_ID'             => $_REQUEST['auth']['refresh_token'],
-    ];
+$params = [
+    'B24_APPLICATION_ID'     => $_ENV['APPLICATION_ID'],
+    'B24_APPLICATION_SECRET' => $_ENV['APPLICATION_SECRET'],
+    'B24_APPLICATION_SCOPE'  => explode(',', $_ENV['APPLICATION_SCOPE']),
+    'B24_REDIRECT_URI'       => 'https://'.$_SERVER['SERVER_NAME'].'/index.php',
+    'DOMAIN'                 => $_REQUEST['auth']['domain'],
+    'MEMBER_ID'              => $_REQUEST['auth']['member_id'],
+    'AUTH_ID'                => $_REQUEST['auth']['access_token'],
+    'REFRESH_ID'             => $_REQUEST['auth']['refresh_token'],
+];
 
-    Client::save($params);
-}
+Client::save($params);
 
 $result = '';
 if (Client::check()) {
